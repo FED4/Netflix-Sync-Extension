@@ -95,6 +95,7 @@ socket.on('message', function(msg) {
 
       if(msg.message === "nfplay" || msg.message === "nfpause"){
         chrome.tabs.sendMessage(active_tabs[i], {message: msg.message});
+        console.log(active_tabs[i]+{message: msg.message});
       }
     }
 });
