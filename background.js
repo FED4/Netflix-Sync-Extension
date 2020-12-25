@@ -1,16 +1,19 @@
 var active_tabs = [];
 let active_tab_id = 0;
-var roomId;
+var roomId, contentScriptInjected;
+contentScriptInjected = false;
 chrome.tabs.onActivated.addListener(tab =>{
   chrome.tabs.get(tab.tabId, current_tab_info =>{
     active_tabs.push(tab.tabId);
     active_tab_id = tab.tabId;
     console.log(current_tab_info.url);
-    if (/^https:\/\/www\.google/.test(current_tab_info.url)) {
-      chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
-      chrome.tabs.executeScript(null, {file: 'foreground.js'}, () => console.log("injected"))
-    }
-    if (/^https:\/\/www\.netflix/.test(current_tab_info.url)) {
+    // if (/^https:\/\/www\.google/.test(current_tab_info.url)) {
+    //   chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
+    //   chrome.tabs.executeScript(null, {file: 'foreground.js'}, () => console.log("injected"))
+    // }
+    if (/^https:\/\/www\.netflix/.test(current_tab_info.url) && !contentScriptInjected) {
+      contentScriptInjected=true;
+      console.log(window.contentScriptInjected);
       chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
       chrome.tabs.executeScript(null, {file: 'netflix_foreground.js'}, () => console.log("injected"))
     }
@@ -22,11 +25,13 @@ chrome.tabs.onCreated.addListener(tab =>{
     active_tabs.push(tab.tabId);
     active_tab_id = tab.tabId;
     console.log(current_tab_info.url);
-    if (/^https:\/\/www\.google/.test(current_tab_info.url)) {
-      chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
-      chrome.tabs.executeScript(null, {file: 'foreground.js'}, () => console.log("injected"))
-    }
-    if (/^https:\/\/www\.netflix/.test(current_tab_info.url)) {
+    // if (/^https:\/\/www\.google/.test(current_tab_info.url)) {
+    //   chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
+    //   chrome.tabs.executeScript(null, {file: 'foreground.js'}, () => console.log("injected"))
+    // }
+    if (/^https:\/\/www\.netflix/.test(current_tab_info.url) && contentScriptInjected !== true) {console.log(window.contentScriptInjected);
+      ScriptInjected = true;
+      console.log(window.contentScriptInjected);
       chrome.tabs.insertCSS(null, {file: 'mystyles.css'})
       chrome.tabs.executeScript(null, {file: 'netflix_foreground.js'}, () => console.log("injected"))
     }
