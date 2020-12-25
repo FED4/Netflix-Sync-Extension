@@ -1,0 +1,27 @@
+{
+  "name":"sync netflix",
+  "description":"my ext",
+  "version":"0.0.1",
+  "manifest_version":2,
+  "icons":{
+    "16":"./obj-16x16.png"
+  },
+  "background":{
+    "scripts":["./socket.io.js", "./background.js"]
+  },
+  "options_page":"./options.html",
+  "browser_action": {
+    "default_popup":"popup.html"
+  },
+  "permissions":[
+    "tabs",
+    "webRequest",
+    "storage",
+    "https://www.google.com/*",
+    "https://www.netflix.com/*",
+    "https://www.bilibili.com/*",
+    "http://localhost/*",
+    "ws://localhost/*"
+  ],
+  "content_security_policy":"script-src 'self' https://cdn.socket.io; object-src 'self'"
+}
