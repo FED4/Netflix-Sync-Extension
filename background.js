@@ -34,8 +34,8 @@ chrome.tabs.onCreated.addListener(tab =>{
 });
 
 //socket = io.connect('http://127.0.0.1:8080', {transports: ['websocket','polling']});
-//socket = io.connect('http://ec2-18-135-16-247.eu-west-2.compute.amazonaws.com:5000');
-socket = io.connect('http://localhost:5000');
+socket = io.connect('http://ec2-18-135-16-247.eu-west-2.compute.amazonaws.com:5000');
+//socket = io.connect('http://localhost:5000');
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if(request.message === 'check'){
