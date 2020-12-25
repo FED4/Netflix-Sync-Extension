@@ -56,14 +56,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
   }
 
-  if(request.message === 'nfplay'){
+  if(request.message === 'nfplays'){
     chrome.tabs.sendMessage(active_tab_id, {message: 'sent to server: nfplay'});
     socket.emit('message',{
       message:'nfplay',
     });
   }
 
-  if(request.message === 'nfpause'){
+  if(request.message === 'nfpauses'){
     chrome.tabs.sendMessage(active_tab_id, {message: 'sent to server: nfpause'});
     socket.emit('message',{
       message:'nfpause',
