@@ -13,22 +13,6 @@ var nfplayerPause;
 //   nfplayerPause = document.getElementsByClassName("button-nfplayerPause")[0];
 // }
 
-if(document.getElementsByClassName("button-nfplayerPlay")[0]){
-  document.getElementsByClassName("button-nfplayerPlay")[0].addEventListener('click', () => {
-    nfplayerPlay = document.getElementsByClassName("button-nfplayerPlay")[0];
-    nfplayerPause = document.getElementsByClassName("button-nfplayerPause")[0];
-    if(nfplayerPlay){
-      chrome.runtime.sendMessage({message:'nfplay'});
-      console.log("I sent msg: play");
-    }
-    if(nfplayerPause){
-      chrome.runtime.sendMessage({message:'nfpause'});
-      console.log("I sent msg: pause");
-    }
-
-  });
-}
-
 if(document.getElementsByClassName("center-controls")[0]){
   document.getElementsByClassName("center-controls")[0].addEventListener('click', () => {
     nfplayerPlay = document.getElementsByClassName("button-nfplayerPlay")[0];
@@ -67,7 +51,7 @@ chrome.runtime.onMessage.addListener((request,sender, sendResponse) => {
   if(request.message === 'nfplay' && nfplayerPause && document.getElementsByClassName("button-nfplayerPause")[0]){
     nfplayerPause.click();
   }
-  if(request.message === 'nfpause' && nfplayerPlay){
+  if(request.message === 'nfpause' && nfplayerPlay && document.getElementsByClassName("button-nfplayerPlay")[0]){
     nfplayerPlay.click();
   }
 });
